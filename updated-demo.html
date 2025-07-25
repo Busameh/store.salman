@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salman Home Store - متجر سلمان للمنتجات المنزلية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        /* Image Slider */
+        .image-slider {
+            margin-top: 80px;
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=400&fit=crop');
+        }
+
+        .slide-content {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .slide-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            line-height: 1.6;
+        }
+
+        .slide-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Products Section */
+        .products {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 4rem 0;
+        }
+
+        .products-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .product-pricing {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .current-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #2e7d32;
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .product-category {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .visit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            color: #666;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            min-width: 45px;
+        }
+
+        .page-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .product-image-container {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .product-image-container {
+                height: 160px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">Salman Home Store</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Image Slider -->
+    <section class="image-slider">
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="slide-title">🔥 عروض حصرية على أواني الطبخ</h2>
+                <p class="slide-subtitle">خصومات تصل إلى 50% على مجموعة مختارة</p>
+                <button class="slide-cta">تسوق الآن</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>متجر سلمان للمنتجات المنزلية</h1>
+            <p>اكتشف مجموعتنا الواسعة من المنتجات المنزلية عالية الجودة<br>
+            أواني طبخ، حلل، منتجات بلاستيكية وأدوات مطبخ بأفضل الأسعار</p>
+            <a href="#products" class="cta-button">تسوق الآن</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="products-content">
+            <h2 class="section-title">منتجاتنا المميزة</h2>
+            <p class="section-subtitle">
+                اكتشف مجموعتنا الواسعة من المنتجات المنزلية عالية الجودة
+            </p>
+            
+            <div class="products-grid">
+                <div class="product-card" onclick="window.open('https://example.com/aluminum-cookware-set', '_blank')">
+                    <div class="discount-badge">-15%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop" alt="طقم أواني ألمنيوم فاخر" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">طقم أواني ألمنيوم فاخر</h3>
+                        <p class="product-description">طقم أواني طبخ من الألمنيوم عالي الجودة، مقاوم للخدش ومناسب لجميع أنواع المواقد</p>
+                        <div class="product-pricing">
+                            <div class="current-price">299 جنيه</div>
+                            <div class="original-price">350 جنيه</div>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-category">أواني طبخ</span>
+                            <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://example.com/aluminum-cookware-set', '_blank')">زيارة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.open('https://example.com/pressure-cooker-large', '_blank')">
+                    <div class="discount-badge">-20%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=300&h=300&fit=crop" alt="حلة ضغط كبيرة" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">حلة ضغط كبيرة</h3>
+                        <p class="product-description">حلة ضغط من الستانلس ستيل، سعة 8 لتر، مثالية للعائلات الكبيرة</p>
+                        <div class="product-pricing">
+                            <div class="current-price">199 جنيه</div>
+                            <div class="original-price">250 جنيه</div>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-category">أواني طبخ</span>
+                            <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://example.com/pressure-cooker-large', '_blank')">زيارة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.open('https://example.com/plastic-storage-containers', '_blank')">
+                    <div class="discount-badge">-25%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop" alt="طقم علب حفظ بلاستيكية" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">طقم علب حفظ بلاستيكية</h3>
+                        <p class="product-description">مجموعة من 12 علبة حفظ بأحجام مختلفة، محكمة الإغلاق وآمنة للاستخدام</p>
+                        <div class="product-pricing">
+                            <div class="current-price">89 جنيه</div>
+                            <div class="original-price">120 جنيه</div>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-category">منتجات بلاستيكية</span>
+                            <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://example.com/plastic-storage-containers', '_blank')">زيارة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.open('https://example.com/tefal-original-pan', '_blank')">
+                    <div class="discount-badge">-17%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop" alt="مقلاة تيفال أصلية" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">مقلاة تيفال أصلية</h3>
+                        <p class="product-description">مقلاة غير لاصقة من التيفال الأصلي، مقاس 28 سم، مناسبة لجميع أنواع الطبخ</p>
+                        <div class="product-pricing">
+                            <div class="current-price">149 جنيه</div>
+                            <div class="original-price">180 جنيه</div>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-category">أواني طبخ</span>
+                            <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://example.com/tefal-original-pan', '_blank')">زيارة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.open('https://example.com/kitchen-utensils-set', '_blank')">
+                    <div class="discount-badge">-21%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop" alt="طقم أدوات مطبخ" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">طقم أدوات مطبخ</h3>
+                        <p class="product-description">مجموعة شاملة من أدوات المطبخ الأساسية، مصنوعة من مواد عالية الجودة</p>
+                        <div class="product-pricing">
+                            <div class="current-price">79 جنيه</div>
+                            <div class="original-price">100 جنيه</div>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-category">أدوات مطبخ</span>
+                            <button class="visit-btn" onclick="event.stopPropagation(); window.open('https://example.com/kitchen-utensils-set', '_blank')">زيارة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn" disabled>السابق</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">التالي</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Salman Home Store. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير النقر على أزرار الترقيم
+            const pageButtons = document.querySelectorAll('.page-btn:not([disabled])');
+            pageButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!this.classList.contains('active') && !this.textContent.includes('السابق') && !this.textContent.includes('التالي')) {
+                        document.querySelector('.page-btn.active').classList.remove('active');
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // تأثير hover للمنتجات
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

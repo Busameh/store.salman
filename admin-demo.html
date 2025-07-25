@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Salman Home Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .admin-page {
+            min-height: 100vh;
+        }
+
+        .admin-login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .admin-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            flex: 1;
+            text-align: center;
+        }
+
+        .admin-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .back-to-home-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-to-home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .admin-login {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .admin-login h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #ffcdd2;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .admin-panel-container {
+            min-height: 100vh;
+            background: #f8f9fa;
+            display: none;
+        }
+
+        .admin-panel {
+            background: transparent;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .products-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            margin: 0 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #2196f3;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #1976d2;
+            transform: translateY(-1px);
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-1px);
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+            
+            .admin-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .admin-login {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .admin-panel {
+                padding: 1rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-page">
+        <!-- صفحة تسجيل الدخول -->
+        <div class="admin-login-container" id="loginPage">
+            <div class="admin-header">
+                <a href="final-demo.html" class="back-to-home-btn">← العودة للرئيسية</a>
+                <h1>🔐 لوحة تحكم المدير</h1>
+                <p>يرجى تسجيل الدخول للوصول إلى لوحة التحكم</p>
+            </div>
+            
+            <div class="admin-login">
+                <h2>🔐 تسجيل دخول المدير</h2>
+                
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="password">كلمة المرور:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="أدخل كلمة المرور"
+                            required
+                        />
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage" style="display: none;">
+                        كلمة المرور غير صحيحة
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        🚀 دخول
+                    </button>
+                    
+                    <div style="text-align: center; margin-top: 1rem; color: #666;">
+                        💡 كلمة المرور الافتراضية: admin123
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- صفحة لوحة التحكم -->
+        <div class="admin-panel-container" id="adminPanel">
+            <div class="admin-header">
+                <div class="admin-header-content">
+                    <a href="final-demo.html" class="back-to-home-btn">← العودة للرئيسية</a>
+                    <h1>🛠️ لوحة تحكم Salman Home Store</h1>
+                    <button class="logout-btn" onclick="handleLogout()">تسجيل خروج 🚪</button>
+                </div>
+            </div>
+            
+            <div class="admin-panel">
+                <div class="success-message" id="successMessage" style="display: none;">
+                    تم تسجيل الدخول بنجاح! مرحباً بك في لوحة التحكم
+                </div>
+                
+                <div class="admin-actions">
+                    <button class="add-btn" onclick="showAddForm()">
+                        ➕ إضافة منتج جديد
+                    </button>
+                </div>
+                
+                <div class="products-table">
+                    <div class="table-header">
+                        📦 إدارة المنتجات
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الصورة</th>
+                                <th>اسم المنتج</th>
+                                <th>الفئة</th>
+                                <th>السعر</th>
+                                <th>الخصم</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=60&h=60&fit=crop" alt="منتج" class="product-image"></td>
+                                <td>طقم أواني ألمنيوم فاخر</td>
+                                <td>أواني طبخ</td>
+                                <td>299 جنيه</td>
+                                <td>15%</td>
+                                <td>
+                                    <button class="edit-btn">✏️ تعديل</button>
+                                    <button class="delete-btn">🗑️ حذف</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=60&h=60&fit=crop" alt="منتج" class="product-image"></td>
+                                <td>حلة ضغط كبيرة</td>
+                                <td>أواني طبخ</td>
+                                <td>199 جنيه</td>
+                                <td>20%</td>
+                                <td>
+                                    <button class="edit-btn">✏️ تعديل</button>
+                                    <button class="delete-btn">🗑️ حذف</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=60&h=60&fit=crop" alt="منتج" class="product-image"></td>
+                                <td>طقم علب حفظ بلاستيكية</td>
+                                <td>منتجات بلاستيكية</td>
+                                <td>89 جنيه</td>
+                                <td>25%</td>
+                                <td>
+                                    <button class="edit-btn">✏️ تعديل</button>
+                                    <button class="delete-btn">🗑️ حذف</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (password === 'admin123') {
+                // إخفاء صفحة تسجيل الدخول
+                document.getElementById('loginPage').style.display = 'none';
+                // إظهار لوحة التحكم
+                document.getElementById('adminPanel').style.display = 'block';
+                // إظهار رسالة النجاح
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // إخفاء رسالة النجاح بعد 3 ثوان
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } else {
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        function handleLogout() {
+            // إظهار صفحة تسجيل الدخول
+            document.getElementById('loginPage').style.display = 'flex';
+            // إخفاء لوحة التحكم
+            document.getElementById('adminPanel').style.display = 'none';
+            // مسح كلمة المرور
+            document.getElementById('password').value = '';
+        }
+        
+        function showAddForm() {
+            alert('سيتم فتح نموذج إضافة منتج جديد');
+        }
+    </script>
+</body>
+</html>
+
