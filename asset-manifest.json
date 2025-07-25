@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/store.salman/static/css/main.157ae039.css",
+    "main.js": "/store.salman/static/js/main.96eaed54.js",
+    "index.html": "/store.salman/index.html",
+    "main.157ae039.css.map": "/store.salman/static/css/main.157ae039.css.map",
+    "main.96eaed54.js.map": "/store.salman/static/js/main.96eaed54.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.157ae039.css",
+    "static/js/main.96eaed54.js"
+  ]
+}
